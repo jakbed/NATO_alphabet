@@ -1,16 +1,19 @@
 import pandas
-#TODO 1. Create a dictionary in this format:
 data_alphabet = pandas.read_csv("nato_phonetic_alphabet.csv")
 alphabet = pandas.DataFrame(data_alphabet)
-# print(alphabet)
 
-alphabet_dict = {row.letter:row.code for (index, row) in alphabet.iterrows()}
-# print(alphabet_dict)
+alphabet_dict = {row.letter: row.code for (index, row) in alphabet.iterrows()}
 
-#TODO 2. Create a list of the phonetic code words from a word that the user inputs.
+end = False
+while end is False:
+    string_to_transform = input("Give me a word to translate: ").upper()
 
-string_to_transform = input("Give me a word to translate: ").upper()
-letter_list = [letter for letter in string_to_transform]
+    try:
+        letter_list = [letter for letter in string_to_transform]
+        code_list = [alphabet_dict[letter] for letter in string_to_transform]
 
-code_list =[alphabet_dict[letter] for letter in string_to_transform]
-print(code_list)
+    except KeyError:
+        print("Please enter only letters - not numbers")
+    else:
+        print(code_list)
+        end = True
